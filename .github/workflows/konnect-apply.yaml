@@ -20,6 +20,6 @@ jobs:
 
       - name: Apply Flights API
         env:
-          KONNECT_TOKEN: ${{ secrets.KONNECT_TOKEN }}
-          KONNECT_REGION: ${{ secrets.KONNECT_REGION }}
+          KONGCTL_DEFAULT_KONNECT_PAT: ${{ secrets.KONNECT_TOKEN }}
+          KONGCTL_DEFAULT_KONNECT_REGION: us
         run: kongctl apply --base-dir -f konnect-api-resource.yaml --auto-approve
