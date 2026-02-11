@@ -1,0 +1,11 @@
+apis:
+  - ref: flights-api
+    name: !file openapi.yaml#info.title
+    description: !file openapi.yaml#info.description
+    version: !file openapi.yaml#info.version
+
+    versions:
+      - ref: flights-api-current-version
+        version: !file openapi.yaml#info.version
+        spec: !file openapi.yaml
+

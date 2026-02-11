@@ -1,0 +1,25 @@
+name: Konnect Apply
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - konnect-api-resource.yaml
+      - openapi.yaml
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install kongctl
+        uses: kong/setup-kongctl@v1
+
+      - name: Apply Flights API
+        env:
+          KONNECT_TOKEN: ${{ secrets.KONNECT_TOKEN }}
+          KONNECT_REGION: ${{ secrets.KONNECT_REGION }}
+        run: kongctl apply --base-dir -f konnect-api-resource.yaml --auto-approve
