@@ -10,7 +10,7 @@ on:
       - openapi.yaml
 
 jobs:
-  sync:
+  apply:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,4 +22,4 @@ jobs:
         env:
           KONGCTL_DEFAULT_KONNECT_PAT: ${{ secrets.KONNECT_TOKEN }}
           KONGCTL_DEFAULT_KONNECT_REGION: us
-        run: kongctl apply --base-dir -f konnect-api-resource.yaml --auto-approve
+        run: kongctl apply -f konnect-api-resource.yaml --auto-approve
