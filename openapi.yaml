@@ -4,7 +4,7 @@ openapi: 3.0.0
 
 info:
   description: KongAir Flights service provides the scheduled flights for KongAir
-  version: 0.1.0
+  version: 0.2.0
   title: Flights Service
 
 servers:
@@ -72,6 +72,35 @@ paths:
                         "id": "SFO-LHR",
                         "origin": "SFO",
                         "destination": "LHR"
+                      }
+                   ]
+  "/aircraft":
+    get:
+      summary: Get available aircraft
+      description: Returns a read-only list of supported aircraft types.
+      tags:
+      - flight-data
+      operationId: get-aircraft
+      responses:
+        '200':
+          description: Successful response with available aircraft
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Aircraft'
+              examples:
+                Example Aircraft List:
+                  value: |
+                   [
+                      {
+                        "code": "A320",
+                        "name": "Airbus A320"
+                      },
+                      {
+                        "code": "B787",
+                        "name": "Boeing 787 Dreamliner"
                       }
                    ]
   "/flights":
@@ -258,3 +287,13 @@ components:
         - id
         - origin
         - destination
+    Aircraft:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+      required:
+        - code
+        - name
