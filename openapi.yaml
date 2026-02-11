@@ -43,6 +43,37 @@ paths:
                  status:
                    type: string
                    example: "unhealthy"
+  "/routes":
+    get:
+      summary: Get available routes
+      description: Returns a read-only list of supported route identifiers.
+      tags:
+      - flight-data
+      operationId: get-routes
+      responses:
+        '200':
+          description: Successful response with available routes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+              examples:
+                Example Routes List:
+                  value: |
+                   [
+                      {
+                        "id": "LHR-SFO",
+                        "origin": "LHR",
+                        "destination": "SFO"
+                      },
+                      {
+                        "id": "SFO-LHR",
+                        "origin": "SFO",
+                        "destination": "LHR"
+                      }
+                   ]
   "/flights":
     get:
       summary: Get KongAir planned flights
@@ -214,3 +245,16 @@ components:
         - in_flight_entertainment
         - meal_options
         - aircraft_type
+    Route:
+      type: object
+      properties:
+        id:
+          type: string
+        origin:
+          type: string
+        destination:
+          type: string
+      required:
+        - id
+        - origin
+        - destination
